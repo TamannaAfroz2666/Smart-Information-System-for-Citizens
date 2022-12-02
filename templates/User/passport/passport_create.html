@@ -1,0 +1,142 @@
+{% extends 'include/index.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <p class="m-5">
+        <a href="{% url 'user_home' %}" type="button" style="float:left;" class="btn btn-primary">
+            <span class="glyphicon glyphicon-backward"></span>
+            Back
+        </a>
+    </p>
+    <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+            <div class="x_title">
+                {#                <h2>Passport <small>Information</small></h2>#}
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <form enctype="multipart/form-data" method="POST"
+                              action="{% url 'passport_create' %}" autocomplete="off">
+                            {% csrf_token %}
+                            <h1>Personal Data and Emergency Contact</h1>
+                            <div class="form-group">
+                                <label for="name" class="col-form-label"> Name:</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="father_name" class="col-form-label"> Father Name:</label>
+                                <input type="text" class="form-control" id="father_name" name="father_name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="mother_name" class="col-form-label"> Mother Name:</label>
+                                <input type="text" class="form-control" id="mother_name" name="mother_name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="spouses_name" class="col-form-label">Spouses Name:</label>
+                                <input type="text" class="form-control" id="spouses_name" name="spouses_name">
+                            </div>
+                            <div class="form-group">
+                                <label for="permanent_address" class="col-form-label">Permanent Address:</label>
+                                <input type="text" class="form-control" id="permanent_address" name="permanent_address"
+                                       required>
+                            </div>
+                            <h1>Emergency Contact</h1>
+                            <div class="form-group">
+                                <label class="col-form-label" for="e_name">Name</label>
+                                <input type="text" id="e_name" name="e_name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label" for="birth_place">Relationship</label>
+                                <input type="text" id="e_relationship" name="e_relationship" class="form-control"
+                                       required>
+                            </div>
+                            <div class="form-group">
+                                <label for="e_address" class="col-form-label"> Address:</label>
+                                <input type="text" class="form-control" id="e_address" name="e_address" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="e_phone" class="col-form-label"> Telephone No:</label>
+                                <input type="text" class="form-control" id="e_phone" name="e_phone" required>
+                            </div>
+                            <h1>Passport Information</h1>
+                            <div class="form-group">
+                                <label for="type" class="col-form-label"> Type:</label>
+                                <input type="text" class="form-control" id="type" name="type" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="country_code" class="col-form-label"> Country Code:</label>
+                                <input type="text" class="form-control" id="country_code" name="country_code" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="passport_number" class="col-form-label"> Passport Number:</label>
+                                <input type="text" class="form-control" id="passport_number" name="passport_number"
+                                       required>
+                            </div>
+                            <div class="form-group">
+                                <label for="surname" class="col-form-label">Surname:</label>
+                                <input type="text" class="form-control" id="surname" name="surname" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="given_name" class="col-form-label"> Given Name:</label>
+                                <input type="text" class="form-control" id="given_name" name="given_name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="nationality" class="col-form-label">Nationality:</label>
+                                <input type="text" class="form-control" id="nationality" name="nationality" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="personal_no" class="col-form-label"> Personal No:</label>
+                                <input type="text" class="form-control" id="personal_no" name="personal_no" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="dob" class="col-form-label"> Date Of Birth:</label>
+                                <input type="date" class="form-control" id="dob" name="dob" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="previous_passport_no" class="col-form-label"> Previous Passport No:</label>
+                                <input type="text" class="form-control" id="previous_passport_no"
+                                       name="previous_passport_no">
+                            </div>
+                            <div class="form-group">
+                                <label for="sex" class="col-form-label"> Sex:</label>
+                                <input type="text" class="form-control" id="sex" name="sex" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="place_of_birth" class="col-form-label"> Place of Birth:</label>
+                                <input type="text" class="form-control" id="place_of_birth" name="place_of_birth"
+                                       required>
+                            </div>
+                            <div class="form-group">
+                                <label for="date_of_issue" class="col-form-label"> Date of Issue:</label>
+                                <input type="date" class="form-control" id="date_of_issue" name="date_of_issue"
+                                       required>
+                            </div>
+                            <div class="form-group">
+                                <label for="issuing_authority" class="col-form-label"> Issuing Authority:</label>
+                                <input type="text" class="form-control" id="issuing_authority" name="issuing_authority">
+                            </div>
+                            <div class="form-group">
+                                <label for="date_of_expiry" class="col-form-label"> Date of Expiry:</label>
+                                <input type="date" class="form-control" id="date_of_expiry" name="date_of_expiry">
+                            </div>
+                            <div class="form-group">
+                                <label for="holder_name" class="col-form-label"> Holder Name:</label>
+                                <input type="text" class="form-control" id="holder_name" name="holder_name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="image" class="col-form-label"> Image</label>
+                                <input type="file" class="form-control-file" id="image" name="image" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

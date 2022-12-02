@@ -1,0 +1,73 @@
+{% extends 'include/index.html' %}
+{% block content %}
+
+    <p class="m-5" id="backbutton">
+        <a href="{% url 'user_home' %}" type="button" style="float:left;" class="btn btn-primary">
+            <span class="glyphicon glyphicon-backward"></span>
+            Back
+        </a>
+    </p>
+    {% if count == 0 %}
+        <p>
+                     <div class="card text-center">
+  <div class="card-header">
+
+  </div>
+  <div class="card-body">
+    <h5 class="card-title"></h5>
+    <p class="card-text"></p>
+    <a href="#" class="btn btn-secondary">No Data Found</a>
+  </div>
+  <div class="card-footer text-muted">
+
+  </div>
+</div>
+        </p>
+    {% else %}
+        <!-- /.col -->
+                <div class="col-md-12">
+                <p class="lead">Birthday Information</p>
+                <div class="row" id="nid_print">
+                    <div class="col-sm-6">
+                        <div class="card">
+{#                            <img class="card-img-top" style="height: 180px; width: 100px" src="{{ request.user.image.url }}" alt="Card image cap">#}
+                            <div class="card-body">
+                                <p class="card-text">Date Of Registration: {{ birth_day_certificate.date_of_registration }}</p>
+                                <p class="card-text">Date of issue Certificate: {{ birth_day_certificate.date_of_issue_certificate }}<</p>
+                                <p class="card-text">Birth Registration Number: {{ birth_day_certificate.birth_registration_number }}</p>
+                                <p class="card-text">Name:{{ birth_day_certificate.name }}</p>
+                                <p class="card-text">Gender: {{ birth_day_certificate.name }}</p>
+                                <p class="card-text">Birth Date:{{ birth_day_certificate.birth_date }}</p>
+                                <p class="card-text">Birth Place:{{ birth_day_certificate.birth_place }}</p>
+                                <p class="card-text">Father Name:{{ birth_day_certificate.father_name }}</p>
+                                <p class="card-text">Mother Name:{{ birth_day_certificate.mother_name }}</p>
+                                <p class="card-text">Father Nationality:{{ birth_day_certificate.father_nationality }}</p>
+                                <p class="card-text">Mother Name:{{ birth_day_certificate.mother_name }}</p>
+                                <p class="card-text">Father Nationality:{{ birth_day_certificate.father_nationality }}</p>
+                                <p class="card-text">Mother Nationality:{{ birth_day_certificate.mother_nationality }}</p>
+                                <p class="card-text">Present Address:{{ birth_day_certificate.present_address }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="birthday">
+                    <th >
+                            <button onclick="Print()" class="btn btn-secondary">Print</button>
+                            </th>
+                </div>
+            </div>
+        <!-- /.col -->
+        </div>
+    {% endif %}
+        <script>
+            function Print(){
+                buttonSend = document.getElementById('nid_print')
+                backbutton = document.getElementById('backbutton')
+                n211 = document.getElementById('birthday')
+                backbutton.style.display = "none";
+                birthday.style.display = "none";
+                print()
+            }
+
+        </script>
+{% endblock %}

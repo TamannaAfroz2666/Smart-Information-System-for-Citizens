@@ -1,0 +1,72 @@
+{% extends 'include/index.html' %}
+{% block content %}
+    <p class="m-5">
+        <a href="{% url 'admin_home' %}" type="button" style="float:left;" class="btn btn-primary">
+            <span class="glyphicon glyphicon-backward"></span>
+            Back
+        </a>
+    </p>
+
+    <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Experience Information</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card-box table-responsive">
+                            <table id="datatable-buttons" class="table table-striped table-bordered"
+                                   style="width:100%">
+                                <thead>
+                                <tr>
+                                    <th> Name</th>
+                                    <th>Title Name</th>
+                                    <th>Company</th>
+                                    <th>From Date</th>
+                                    <th>To Date</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for experience in experiences %}
+                                    <tr>
+                                        <td>{{ experience.user_id.username }}</td>
+                                        <td>{{ experience.title }}</td>
+                                        <td>{{ experience.company }}</td>
+                                        <td>{{ experience.fromDate }}</td>
+                                        {% if experience.i_currently_work_here %}
+                                            <td>Present</td>
+                                        {% else %}
+                                            <td>{{ experience.toDate }}</td>
+                                        {% endif %}
+
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascript %}
+    {#    <script>#}
+    {#        console.log('javascript work')#}
+    {#        buttonSend = document.getElementById('skill_save')#}
+    {#        buttonSend.addEventListener("click", async () => {#}
+    {#            await sendForm()#}
+    {#        })#}
+    {#        const sendForm = async () => {#}
+    {#            console.log('sendForm is work')#}
+    {#            const skill_name = document.getElementById('skill_name').value#}
+    {#            const skill_level = document.getElementById('skill_level').value#}
+    {#            console.log('skill name = ', skill_name)#}
+    {#            console.log('skill level = ', skill_level)#}
+    {#        }#}
+    {#    </script>#}
+{% endblock %}

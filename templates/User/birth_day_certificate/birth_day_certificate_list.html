@@ -1,0 +1,131 @@
+{% extends 'include/index.html' %}
+{% block content %}
+
+    <p class="m-5" id="backbutton">
+        <a href="{% url 'user_home' %}" type="button" style="float:left;" class="btn btn-primary">
+            <span class="glyphicon glyphicon-backward"></span>
+            Back
+        </a>
+    </p>
+    {% if count == 0 %}
+        <p>
+            <a href="{% url 'birth_day_certificate_create' %}" type="button" style="float:right;"
+               cl{% comment %}{% endcomment %}ass="btn btn-primary">
+                <span class="glyphicon glyphicon-plus"></span>
+                BirthDay Certificate
+            </a>
+        </p>
+        <div class="card text-center">
+          <div class="card-header">
+
+          </div>
+          <div class="card-body">
+            <h5 class="card-title"></h5>
+            <p class="card-text"></p>
+            <a href="#" class="btn btn-secondary">No Data Here</a>
+          </div>
+          <div class="card-footer text-muted">
+
+          </div>
+        </div>
+    {% else %}
+        <!-- /.col -->
+        <div class="col-md-12">
+                <p class="lead">Birthday Information</p>
+                <div class="row" id="nid_print">
+                    <div class="col-sm-6">
+                        <div class="card">
+{#                            <img class="card-img-top" style="height: 180px; width: 100px" src="{{ request.user.image.url }}" alt="Card image cap">#}
+                            <div class="card-body">
+                                <p class="card-text">Date Of Registration: {{ birth_day_certificate.date_of_registration }}</p>
+                                <p class="card-text">Date of issue Certificate: {{ birth_day_certificate.date_of_issue_certificate }}<</p>
+                                <p class="card-text">Birth Registration Number: {{ birth_day_certificate.birth_registration_number }}</p>
+                                <p class="card-text">Name:{{ birth_day_certificate.name }}</p>
+                                <p class="card-text">Gender: {{ birth_day_certificate.name }}</p>
+                                <p class="card-text">Birth Date:{{ birth_day_certificate.birth_date }}</p>
+                                <p class="card-text">Birth Place:{{ birth_day_certificate.birth_place }}</p>
+                                <p class="card-text">Father Name:{{ birth_day_certificate.father_name }}</p>
+                                <p class="card-text">Mother Name:{{ birth_day_certificate.mother_name }}</p>
+                                <p class="card-text">Father Nationality:{{ birth_day_certificate.father_nationality }}</p>
+                                <p class="card-text">Mother Name:{{ birth_day_certificate.mother_name }}</p>
+                                <p class="card-text">Father Nationality:{{ birth_day_certificate.father_nationality }}</p>
+                                <p class="card-text">Mother Nationality:{{ birth_day_certificate.mother_nationality }}</p>
+                                <p class="card-text">Present Address:{{ birth_day_certificate.present_address }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <div class="col-md-12" >
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody >
+
+                    <tr >
+                        {% if birth_day_certificate.is_verified %}
+                        {% else %}
+                            <th id="birthday">
+                            <button onclick="Print()" class="btn btn-secondary">Print</button>
+
+
+                            <a class="btn btn-primary"
+                                   href="{% url 'birth_day_certificate_update' birth_day_certificate.id %}">Edit</a>
+                                <a data-toggle="modal" class="btn btn-danger"
+                                   data-target="#delete{{ birth_day_certificate.id }}">
+                                    <i class="fa fa-trash">Delete</i>
+                                </a>
+                            </th>
+                        {% endif %}
+                    </tr>
+
+
+                    <!-- Delete Modal -->
+                    <div class="modal fade DeleteModal" id="delete{{ birth_day_certificate.id }}"
+                         tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
+                         aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <form method="post"
+                                      action="{% url 'birth_day_certificate_delete' birth_day_certificate.id %}"
+                                      enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="modal-body text-center p-3">
+                                        <h5 class="mt-4">Do you want to delete?</h5>
+                                    </div>
+                                    <div class="modal-footer"
+                                         style="border:none !important; border: none !important;">
+                                        <button type="button" class="btn btn-sm btn-primary"
+                                                data-dismiss="modal">No
+                                        </button>
+                                        <button type="submit" class="btn btn-sm btn-danger">Yes
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- /.col -->
+        </div>
+    {% endif %}
+<script>
+            function Print(){
+                buttonSend = document.getElementById('nid_print')
+                backbutton = document.getElementById('backbutton')
+
+                birthday = document.getElementById('birthday')
+
+                backbutton.style.display = "none";
+
+                birthday.style.display = "none";
+
+                print()
+            }
+
+        </script>
+{% endblock %}

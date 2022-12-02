@@ -1,0 +1,234 @@
+{% extends 'include/index.html' %}
+{% block content %}
+
+    <p class="m-5" id="backbutton">
+        <a href="{% url 'user_home' %}" type="button" style="float:left;" class="btn btn-primary">
+            <span class="glyphicon glyphicon-backward"></span>
+            Back
+        </a>
+    </p>
+    {% if count == 0 %}
+
+        <div class="card text-center">
+          <div class="card-header">
+
+          </div>
+          <div class="card-body">
+            <h5 class="card-title"></h5>
+            <p class="card-text"></p>
+            <a href="#" class="btn btn-secondary">No Data Here</a>
+          </div>
+          <div class="card-footer text-muted">
+
+          </div>
+        </div>
+    {% else %}
+        <!-- /.col -->
+        <div class="col-md-12">
+                <div class="row" id="nid_print">
+                    <div class="col-sm-6">
+                        {% if birth_day_certificate_count > 0 %}
+                            <p class="lead">Birthday Information</p>
+                            <div class="card">
+                                <div class="card-body">
+                                    <p class="card-text">Date Of Registration: {{ birth_day_certificate.date_of_registration }}</p>
+                                    <p class="card-text">Date of issue Certificate: {{ birth_day_certificate.date_of_issue_certificate }}</p>
+                                    <p class="card-text">Birth Registration Number: {{ birth_day_certificate.birth_registration_number }}</p>
+                                    <p class="card-text">Name:{{ birth_day_certificate.name }}</p>
+                                    <p class="card-text">Gender: {{ birth_day_certificate.name }}</p>
+                                    <p class="card-text">Birth Date:{{ birth_day_certificate.birth_date }}</p>
+                                    <p class="card-text">Birth Place:{{ birth_day_certificate.birth_place }}</p>
+                                    <p class="card-text">Father Name:{{ birth_day_certificate.father_name }}</p>
+                                    <p class="card-text">Mother Name:{{ birth_day_certificate.mother_name }}</p>
+                                    <p class="card-text">Father Nationality:{{ birth_day_certificate.father_nationality }}</p>
+                                    <p class="card-text">Mother Name:{{ birth_day_certificate.mother_name }}</p>
+                                    <p class="card-text">Father Nationality:{{ birth_day_certificate.father_nationality }}</p>
+                                    <p class="card-text">Mother Nationality:{{ birth_day_certificate.mother_nationality }}</p>
+                                    <p class="card-text">Present Address:{{ birth_day_certificate.present_address }}</p>
+                                </div>
+                            </div>
+                            {% endif %}
+                    </div>
+                    <div class="col-sm-6">
+                        {% if passport_info_count > 0 %}
+                            <p class="lead">Passport Information</p>
+                            <div class="card">
+                                <div class="card-body">
+                                    <p class="card-text">Name: {{ passport_info.name }}</p>
+                                    <p class="card-text">Father's Name: {{ passport_info.father_name }}<</p>
+                                    <p class="card-text">Mother's Name: {{ passport_info.mother_name }}</p>
+                                    <p class="card-text">Spouse's Name: {{ passport_info.spouses_name }}</p>
+                                    <p class="card-text">Permanent Address: {{ passport_info.permanent_address }}</p>
+                                    <p class="card-text">passport type:{{ passport_info.type }}</p>
+                                    <p class="card-text">Country Code:{{ passport_info.country_code }}</p>
+                                    <p class="card-text">Passport Number:{{ passport_info.passport_number }}</p>
+                                    <p class="card-text">Sur Name:{{ passport_info.surname }}</p>
+                                    <p class="card-text">Nationality:{{ passport_info.nationality }}</p>
+                                    <p class="card-text">Personal_no:{{ passport_info.personal_no }}</p>
+                                    <p class="card-text">Date Of Birth:{{ passport_info.dob }}</p>
+                                    <p class="card-text">previous_passport_no:{{ passport_info.previous_passport_no }}</p>
+                                    <p class="card-text">Holder Name:{{ passport_info.holder_name }}</p>
+                                </div>
+                            </div>
+                             {% endif %}
+                    </div>
+                </div>
+        </div>
+        <div class="col-md-12">
+
+            {% if nid_information_count > 0 %}
+                <p class="lead">NID INFORMATION</p>
+                <div class="row" id="nid_print">
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <img class="card-img-top" style="height: 180px; width: 100px" src="{{ request.user.image.url }}" alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-text">NAME: {{ nid_information.name_english }}</p>
+                                <p class="card-text">পিতা: {{ nid_information.father_name }}</p>
+                                <p class="card-text">মাতা: {{ nid_information.mother_name }}</p>
+                                <p class="card-text">Date of Birth: {{ nid_information.date_of_birth }}</p>
+                                <p class="card-text">NID No: {{ nid_information.nid_no }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                {% endif %}
+
+        <br>
+        <br>
+        {% if education_count > 0 %}
+             <p class="lead">Education INFORMATION</p>
+        <div class="col-sm-12">
+                        <div class="card-box table-responsive">
+                            <table class="table table-striped table-bordered"
+                                   style="width:100%">
+                                <thead>
+                                <tr>
+                                    <th>Institution Name</th>
+                                    <th>Major</th>
+                                    <th>Degree</th>
+                                    <th>From Date</th>
+                                    <th>To Date</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for education in education %}
+                                    <tr>
+                                        <td>{{ education.institution }}</td>
+                                        <td>{{ education.major }}</td>
+                                        <td>{{ education.degree }}</td>
+                                        <td>{{ education.fromDate }}</td>
+                                        {% if education.i_currently_attend %}
+                                            <td>Present</td>
+                                        {% else %}
+                                            <td>{{ education.toDate }}</td>
+                                        {% endif %}
+
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+            {% endif %}
+        {% if experience_count > 0 %}
+             <p class="lead">Experience INFORMATION</p>
+   <div class="col-sm-12">
+                        <div class="card-box table-responsive">
+                            <table class="table table-striped table-bordered"
+                                   style="width:100%">
+                                <thead>
+                                <tr>
+                                    <th>Title Name</th>
+                                    <th>Company</th>
+                                    <th>From Date</th>
+                                    <th>To Date</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for experience in experience %}
+                                    <tr>
+                                        <td>{{ experience.title }}</td>
+                                        <td>{{ experience.company }}</td>
+                                        <td>{{ experience.fromDate }}</td>
+                                        {% if experience.i_currently_work_here %}
+                                            <td>Present</td>
+                                        {% else %}
+                                            <td>{{ experience.toDate }}</td>
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+        {% endif  %}
+        {% if skill_count > 0%}
+            <p class="lead">Skills INFORMATION</p>
+            <div class="col-sm-12">
+                        <div class="card-box table-responsive">
+                            <table  class="table table-striped table-bordered"
+                                   style="width:100%">
+                                <thead>
+                                <tr>
+                                    <th>Skill Name</th>
+                                    <th>Skill Level</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for skill in skill %}
+                                    <tr>
+                                        <td>{{ skill.skill_name }}</td>
+                                        <td>{{ skill.skill_level }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+            {% endif %}
+        <div class="col-md-12" >
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody >
+
+                    <tr >
+
+                            <th id="birthday">
+                            <button onclick="Print()" class="btn btn-secondary">Print</button>
+
+
+
+                            </th>
+
+                    </tr>
+
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- /.col -->
+        </div>
+    {% endif %}
+<script>
+            function Print(){
+                buttonSend = document.getElementById('nid_print')
+                backbutton = document.getElementById('backbutton')
+
+                birthday = document.getElementById('birthday')
+
+                backbutton.style.display = "none";
+
+                birthday.style.display = "none";
+
+                print()
+            }
+
+        </script>
+{% endblock %}

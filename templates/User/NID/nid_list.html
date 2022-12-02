@@ -1,0 +1,376 @@
+{% extends 'include/index.html' %}
+{% block content %}
+    <p class="m-5">
+        <a id="nid0" href="{% url 'user_home' %}" type="button" style="float:left;" class="btn btn-primary">
+            <span class="glyphicon glyphicon-backward"></span>
+            Back
+        </a>
+    </p>
+    {% if count == 0 %}
+        <p >
+            <button id="nid1" type="button" style="float:right;" class="btn btn-primary"
+                    data-toggle="modal" data-target="#NIDAddModal" data-whatever="">
+                <span class="glyphicon glyphicon-plus"></span>
+                NID Information
+            </button>
+        </p>
+        <div class="card text-center">
+          <div class="card-header">
+
+          </div>
+          <div class="card-body">
+            <h5 class="card-title"></h5>
+            <p class="card-text"></p>
+            <a href="#" class="btn btn-secondary">No Data Here</a>
+          </div>
+          <div class="card-footer text-muted">
+
+          </div>
+        </div>
+
+
+
+
+        <div class="modal fade" id="NIDAddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">New NID</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form enctype="multipart/form-data" method="POST" action="{% url 'nid_create' %}" autocomplete="off">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="professions" class="col-form-label">Professions:</label>
+                                <select class="form-control" id="professions" name="professions" required>
+                                    <option value="">Select professions</option>
+                                    <option value="Doctor">Doctor</option>
+                                    <option value="Engineer">Engineer</option>
+                                    <option value="Pilot">Pilot</option>
+                                    <option value="Teacher">Teacher</option>
+                                    <option value="Player">Player</option>
+                                    <option value="Student">Student</option>
+                                    <option value="Farmer">Farmer</option>
+                                    <option value="Others">Others</option>
+                                </select>
+                            </div>
+{#                            <div class="form-group">#}
+{#                                <label for="name_bangla" class="col-form-label"> Name বাংলা:</label>#}
+{#                                <input type="text" class="form-control" id="name_bangla" name="name_bangla" required>#}
+{#                            </div>#}
+                            <div class="form-group">
+                                <label for="name_english" class="col-form-label">Name English:</label>
+                                <input type="text" class="form-control" id="name_english" name="name_english" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="father_name" class="col-form-label">Father Name:</label>
+                                <input type="text" class="form-control" id="father_name" name="father_name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="mother_name" class="col-form-label">Mother Name:</label>
+                                <input type="text" id="mother_name" class="form-control" name="mother_name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="date_of_birth" class="col-form-label">Date Of Birth:</label>
+                                <input type="date" id="date_of_birth" class="form-control" name="date_of_birth"
+                                       required>
+                            </div>
+                            <div class="form-group">
+                                <label for="nid_no" class="col-form-label">NID No:</label>
+                                <input type="text" class="form-control" id="nid_no" name="nid_no" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label" for="back_image">NID Back Image</label>
+                                <input type="file" class="form-control-file" id="back_image" name="back_image" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label" for="front_image">NID Front Image</label>
+                                <input type="file" class="form-control-file" id="front_image" name="front_image"
+                                       required>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <!-- /.col -->
+            <div class="col-md-12">
+                <p class="lead">NID INFORMATION</p>
+                <div class="row" id="nid_print">
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <img class="card-img-top" style="height: 180px; width: 100px" src="{{ request.user.image.url }}" alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-text">NAME: {{ nid_information.name_english }}</p>
+                                <p class="card-text">পিতা: {{ nid_information.father_name }}</p>
+                                <p class="card-text">মাতা: {{ nid_information.mother_name }}</p>
+                                <p class="card-text">Date of Birth: {{ nid_information.date_of_birth }}</p>
+                                <p class="card-text">NID No: {{ nid_information.nid_no }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+{#                    <tr>#}
+{#                        <th style="width:50%">professions:</th>#}
+{#                        <td>{{ nid_information.professions }}</td>#}
+{#                    </tr>#}
+{#                    <tr>#}
+{#                        <th style="width:50%">Bangla Name:</th>#}
+{#                        <td>{{ nid_information.name_bangla }}</td>#}
+{#                    </tr>#}
+{#                    <tr>#}
+{#                        <th>English Name</th>#}
+{#                        <td>{{ nid_information.name_english }}</td>#}
+{#                    </tr>#}
+{#                    <tr>#}
+{#                        <th>Father Name:</th>#}
+{#                        <td>{{ nid_information.father_name }}</td>#}
+{#                    </tr>#}
+{#                    <tr>#}
+{#                        <th>Mother Name:</th>#}
+{#                        <td>{{ nid_information.mother_name }}</td>#}
+{#                    </tr>#}
+{#                    <tr>#}
+{#                        <th>date_of_birth:</th>#}
+{#                        <td>{{ nid_information.date_of_birth }}</td>#}
+{#                    </tr>#}
+{#                    <tr>#}
+{#                        <th>NID No:</th>#}
+{#                        <td>{{ nid_information.nid_no }}</td>#}
+{#                    </tr>#}
+{#                    <tr>#}
+{#                        <th>back image</th>#}
+{#                        <td>#}
+{#                            {% if nid_information.back_image %}#}
+{#                                <img src="{{ nid_information.back_image.url }}">#}
+{#                            {% else %}#}
+{#                                no image#}
+{#                            {% endif %}#}
+{#                        </td>#}
+{#                    </tr>#}
+{#                    <tr>#}
+{#                        <th>front image</th>#}
+{#                        <td>#}
+{#                            {% if nid_information.front_image %}#}
+{#                                <img src="{{ nid_information.front_image.url }}">#}
+{#                            {% else %}#}
+{#                                no image#}
+{#                            {% endif %}#}
+{#                        </td>#}
+{#                    </tr>#}
+{#                    <tr>#}
+{#                        <th>Verified</th>#}
+{#                        <td>{{ nid_information.is_verified }}</td>#}
+{#                    </tr>#}
+                    <tr>
+                        <th id="nid_hidden">
+                            {% if nid_information.is_verified %}
+
+                            {% else %}
+                                <button onclick="Print()" class="btn btn-secondary">Print</button>
+                                <a data-toggle="modal" class="btn btn-primary"
+                                   data-target="#edit{{ nid_information.id }}"><i
+                                        class="fa fa-edit">Edit</i>
+                                </a>
+                                <a data-toggle="modal" class="btn btn-danger"
+                                   data-target="#delete{{ nid_information.id }}">
+                                    <i class="fa fa-trash">Delete</i>
+                                </a>
+                                <!-- Edit Modal -->
+                                <div class="modal fade" id="edit{{ nid_information.id }}" tabindex="-1" role="dialog"
+                                     aria-labelledby="myLargeModalLabel"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Update
+                                                    NID INFORMATION</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form enctype="multipart/form-data" method="POST" autocomplete="off"
+                                                      action="{% url 'nid_update' nid_information.id %}">
+                                                    {% csrf_token %}
+                                                    <div class="form-group">
+                                                        <label for="professions"
+                                                               class="col-form-label">Professions:</label>
+                                                        <select class="form-control" id="professions" name="professions"
+                                                                required>
+                                                            <option value="">Select professions</option>
+                                                            <option {% if nid_information.professions == "Doctor" %}
+                                                                selected {% endif %} value="Doctor">Doctor
+                                                            </option>
+                                                            <option {% if nid_information.professions == "Engineer" %}
+                                                                selected {% endif %} value="Engineer">Engineer
+                                                            </option>
+                                                            <option {% if nid_information.professions == "Pilot" %}
+                                                                selected {% endif %} value="Pilot">Pilot
+                                                            </option>
+                                                            <option {% if nid_information.professions == "Teacher" %}
+                                                                selected {% endif %} value="Teacher">Teacher
+                                                            </option>
+                                                            <option {% if nid_information.professions == "Player" %}
+                                                                selected {% endif %} value="Player">Player
+                                                            </option>
+                                                            <option {% if nid_information.professions == "Student" %}
+                                                                selected {% endif %} value="Student">Student
+                                                            </option>
+                                                            <option {% if nid_information.professions == "Farmer" %}
+                                                                selected {% endif %} value="Farmer">Farmer
+                                                            </option>
+                                                            <option {% if nid_information.professions == "Others" %}
+                                                                selected {% endif %} value="Others">Others
+                                                            </option>
+                                                        </select>
+                                                    </div>
+{#                                                    <div class="form-group">#}
+{#                                                        <label for="name_bangla" class="col-form-label"> Name#}
+{#                                                            বাংলা:</label>#}
+{#                                                        <input type="text" class="form-control" id="name_bangla"#}
+{#                                                               required#}
+{#                                                               value="{{ nid_information.name_bangla }}"#}
+{#                                                               name="name_bangla">#}
+{#                                                    </div>#}
+                                                    <div class="form-group">
+                                                        <label for="name_english" class="col-form-label">Name:</label>
+                                                        <input type="text" class="form-control" id="name_english"
+                                                               required
+                                                               value="{{ nid_information.name_english }}"
+                                                               name="name_english">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="father_name" class="col-form-label">Father
+                                                            Name:</label>
+                                                        <input type="text" class="form-control" id="father_name"
+                                                               required
+                                                               value="{{ nid_information.father_name }}"
+                                                               name="father_name">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="mother_name" class="col-form-label">Mother
+                                                            Name:</label>
+                                                        <input type="text" id="mother_name" class="form-control"
+                                                               required
+                                                               value="{{ nid_information.mother_name }}"
+                                                               name="mother_name">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="date_of_birth" class="col-form-label">Date Of
+                                                            Birth:</label>
+                                                        <input type="date" id="date_of_birth" class="form-control"
+                                                               value="{{ nid_information.date_of_birth|date:"Y-m-d" }}"
+                                                               name="date_of_birth" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="nid_no" class="col-form-label">NID No:</label>
+                                                        <input type="text" class="form-control"
+                                                               value="{{ nid_information.nid_no }}"
+                                                               id="nid_no" required
+                                                               name="nid_no">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>NID Back Image </label><br>
+                                                        {% if nid_information.back_image %}
+                                                            <a href="{{ nid_information.back_image.url }}">{{ nid_information.back_image }}</a>
+                                                        {% endif %}
+                                                        <input type="file" class="form-control-file" id="back_image"
+                                                               value="{{ nid_information.back_image }}"
+                                                               name="back_image">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>NID Front Image</label><br>
+                                                        {% if nid_information.front_image %}
+                                                            <a href="{{ nid_information.front_image.url }}">{{ nid_information.front_image }}</a>
+                                                        {% endif %}
+
+                                                        <input type="file" class="form-control-file" id="front_image"
+                                                               name="front_image">
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal">Close
+                                                        </button>
+                                                        <button type="submit" class="btn btn-primary">Update
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Delete Modal -->
+                                <div class="modal fade DeleteModal" id="delete{{ nid_information.id }}"
+                                     tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <form method="post"
+                                                  action="{% url 'nid_delete' nid_information.id %}"
+                                                  enctype="multipart/form-data">
+                                                {% csrf_token %}
+                                                <div class="modal-body text-center p-3">
+                                                    <h5 class="mt-4">Do you want to delete?</h5>
+                                                </div>
+                                                <div class="modal-footer"
+                                                     style="border:none !important; border: none !important;">
+                                                    <button type="button" class="btn btn-sm btn-primary"
+                                                            data-dismiss="modal">No
+                                                    </button>
+                                                    <button type="submit" class="btn btn-sm btn-danger">Yes
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </th>
+                    </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- /.col -->
+
+    {% endif %}
+
+{% endblock %}
+
+{% block javascript %}
+        <script>
+            function Print(){
+                buttonSend = document.getElementById('nid_print')
+                buttoNid_hidden = document.getElementById('nid_hidden')
+                buttoNid_hidden0 = document.getElementById('nid0')
+                {#buttoNid_hidden1 = document.getElementById('nid1')#}
+
+                buttoNid_hidden.style.display = "none";
+                buttoNid_hidden0.style.display = "none";
+                {#buttoNid_hidden1.style.display = "none";#}
+
+                print()
+            }
+
+        </script>
+{% endblock %}

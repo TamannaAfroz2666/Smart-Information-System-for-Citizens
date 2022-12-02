@@ -1,0 +1,95 @@
+{% extends 'include/index.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Update Birthday Certificate <small>Information</small></h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <form enctype="multipart/form-data" method="POST"
+                              action="{% url 'birth_day_certificate_update' birth_day_certificate.id %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="date_of_registration" class="col-form-label"> Date Of Registration:</label>
+                                <input type="date" class="form-control" value="{{ birth_day_certificate.date_of_registration|date:"Y-m-d" }}"
+                                       id="date_of_registration" name="date_of_registration" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="date_of_issue_certificate" class="col-form-label"> Date Of Issue Certificate:</label>
+                                <input type="date" class="form-control" value="{{ birth_day_certificate.date_of_issue_certificate|date:"Y-m-d" }}"
+                                       id="date_of_issue_certificate" name="date_of_issue_certificate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="birth_registration_number" class="col-form-label"> Birth Registration Number:</label>
+                                <input type="text" class="form-control" value="{{ birth_day_certificate.birth_registration_number }}"
+                                       id="birth_registration_number" name="birth_registration_number" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name" class="col-form-label"> Name:</label>
+                                <input type="text" class="form-control" value="{{ birth_day_certificate.name }}"
+                                       id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                 <label for="gender" class="col-form-label"> Gender:</label>
+                                <input type="text" class="form-control" value="{{ birth_day_certificate.gender }}"
+                                       id="gender" name="gender" required
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label" for="birth_date">Birth Date</label>
+                                <input type="date" value="{{ birth_day_certificate.birth_date|date:"Y-m-d" }}"
+                                       id="birth_date" name="birth_date" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label" for="birth_place">Birth Place</label>
+                                <input type="text"  value="{{ birth_day_certificate.birth_place }}"
+                                       id="birth_place" name="birth_place" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="father_name" class="col-form-label"> Father Name:</label>
+                                <input type="text" class="form-control" value="{{ birth_day_certificate.father_name }}"
+                                       id="father_name" name="father_name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="father_nationality" class="col-form-label"> Father Nationality:</label>
+                                <input type="text" class="form-control" value="{{ birth_day_certificate.father_nationality }}"
+                                       id="father_nationality" name="father_nationality" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="mother_name" class="col-form-label"> Mother Name:</label>
+                                <input type="text" class="form-control" value="{{ birth_day_certificate.mother_name }}"
+                                       id="mother_name" name="mother_name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="mother_nationality" class="col-form-label"> Mother Nationality:</label>
+                                <input type="text" class="form-control" value="{{ birth_day_certificate.mother_nationality }}"
+                                       id="mother_nationality" name="mother_nationality" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="present_address" class="col-form-label">Present Address:</label>
+                                <textarea class="form-control"
+                                          id="present_address" name="present_address">{{ birth_day_certificate.present_address }}</textarea>
+                            </div>
+                             <div class="form-group">
+                             <label for="image" class="col-form-label"> Image</label><br>
+                                 {% if birth_day_certificate.image %}
+                                 <a href="{{ birth_day_certificate.image.url }}">{{ birth_day_certificate.image }}</a>
+                                 {% endif %}
+                                <input type="file" class="form-control-file" id="image" name="image">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

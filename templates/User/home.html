@@ -1,0 +1,138 @@
+{% extends 'include/index.html' %} {% load static %} {% block content %}
+
+<!-- page content -->
+<div class="right_col " role="main">
+  <br />
+  <div class="">
+    <div class="clearfix"></div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="">
+          <div class="x_content">
+            <div class="row">
+              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6">
+                <div class="tile-stats">
+                  <div class="icon"><i class="fa fa-birthday-cake"></i></div>
+                  <div class="count">{{ total_birth_certificate }}</div>
+
+                  <h3>
+                    <a href="{% url 'birth_day_certificate_list' %}">
+                      Birth Certificate</a
+                    >
+                  </h3>
+                  <p></p>
+                </div>
+              </div>
+              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6">
+                <div class="tile-stats">
+                  <div class="icon"><i class="fa fa-paper-plane"></i></div>
+                  <div class="count">{{ total_passport }}</div>
+
+                  <h3><a href="{% url 'passport_list' %}">Passport</a></h3>
+                  <p></p>
+                </div>
+              </div>
+              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6">
+                <div class="tile-stats">
+                  <div class="icon"><i class="fa fa-newspaper-o"></i></div>
+                  <div class="count">{{ total_nid }}</div>
+                  <h3><a href="{% url 'nid_list' %}">NID</a></h3>
+                  <p></p>
+                </div>
+              </div>
+              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6">
+                <div class="tile-stats">
+                  <div class="icon"><i class="fa fa-check-square-o"></i></div>
+                  <div class="count">{{ total_education }}</div>
+
+                  <h3><a href="{% url 'education_list' %}">Education</a></h3>
+                </div>
+              </div>
+            </div>
+
+            <br />
+            <div class="row">
+              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6">
+                <div class="tile-stats">
+                  <div class="icon"><i class="fa fa-skyatlas"></i></div>
+                  <div class="count">{{ total_skills }}</div>
+                  <h3><a href="{% url 'skill_list' %}">Skills</a></h3>
+                  <p></p>
+                </div>
+              </div>
+              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6">
+                <div class="tile-stats">
+                  <div class="icon">
+                    <i class="fa fa-external-link-square"></i>
+                  </div>
+                  <div class="count">{{ total_experience }}</div>
+                  <h3><a href="{% url 'experience_list' %}">Experience</a></h3>
+                  <p></p>
+                </div>
+              </div>
+              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6">
+                <div class="tile-stats">
+                  <div class="icon"><i class="fa fa-product-hunt"></i></div>
+                  <div class="count mt-lg-5"></div>
+                  <h3><a href="{% url 'profile' %}">Profile</a></h3>
+                  <p></p>
+                </div>
+              </div>
+              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6">
+                <div class="tile-stats">
+                  <div class="icon"><i class="fa fa-product-hunt"></i></div>
+                  <div class="count mt-lg-5"></div>
+                  <h3>
+                    <a href="{% url 'change_password' %}">Change Password</a>
+                  </h3>
+                  <p></p>
+                </div>
+              </div>
+              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6">
+                <div class="tile-stats">
+                  <div class="icon"><i class="fa fa-sign-out"></i></div>
+                  <div class="count mt-lg-5"></div>
+                  <h3><a href="{% url 'logout' %}">Log Out</a></h3>
+                  <p></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-title">
+    <div class="title_left">
+      <h1></h1>
+    </div>
+
+    <div class="title_right">
+      <div class="col-md-5 col-sm-5 form-group pull-right top_search">
+        <form
+          method="POST"
+          action="{% url 'search_nid' %}"
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %}
+          <div class="input-group">
+            <input
+              type="text"
+              id="nid_number"
+              name="nid_number"
+              class="form-control"
+              placeholder="Search for NID..."
+            />
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit">Go!</button>
+            </span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /page content -->
+{% endblock %}

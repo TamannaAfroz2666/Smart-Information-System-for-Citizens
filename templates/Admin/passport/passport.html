@@ -1,0 +1,90 @@
+{% extends 'include/index.html' %}
+{% block content %}
+    <p class="m-5">
+    <a href="{% url 'admin_home' %}" type="button" style="float:left;" class="btn btn-primary">
+            <span class="glyphicon glyphicon-backward"></span>
+              Back
+        </a>
+    </p>
+
+    <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>All Passport Information</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card-box table-responsive">
+                            <table id="datatable-buttons" class="table table-striped table-bordered"
+                                   style="width:100%">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Father Name</th>
+                                    <th>Mother Name</th>
+                                    <th>Passport NO</th>
+                                    <th>Birth Date</th>
+                                    <th>Verify</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for passport in passport_info %}
+                                    <tr>
+                                        <td>{{ passport.name }}</td>
+                                        <td>{{ passport.father_name }}</td>
+                                        <td>{{ passport.mother_name }}</td>
+                                        <td>{{ passport.passport_number }}</td>
+                                        <td>{{ passport.dob }}</td>
+                                        <td>{{ passport.is_verify }}</td>
+                                        <td>
+                                            {% if passport.is_verify %}
+                                            {% else %}
+                                                <a data-toggle="modal" data-target="#delete{{ passport.id }}">
+                                                    Verified
+                                                </a>
+                                            {% endif %}
+                                        </td>
+                                        <!-- Verified Modal -->
+                                        <div class="modal fade DeleteModal" id="delete{{ passport.id }}"
+                                             tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
+                                             aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <form method="post"
+                                                          action="{% url 'admin_nid_verified' passport.id %}"
+                                                          enctype="multipart/form-data">
+                                                        {% csrf_token %}
+                                                        <div class="modal-body text-center p-3">
+                                                            <h5 class="mt-4">Are you sure to Verify this Passport?</h5>
+                                                        </div>
+                                                        <div class="modal-footer"
+                                                             style="border:none !important; border: none !important;">
+                                                            <button type="button" class="btn btn-sm btn-primary"
+                                                                    data-dismiss="modal">No
+                                                            </button>
+                                                            <button type="submit" class="btn btn-sm btn-danger">Yes
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascript %}
+
+{% endblock %}

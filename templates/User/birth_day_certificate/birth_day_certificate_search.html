@@ -1,0 +1,46 @@
+{% extends 'include/index.html' %}
+{% block content %}
+    <p class="m-5">
+        <a href="{% url 'user_home' %}" type="button" style="float:left;" class="btn btn-primary">
+            <span class="glyphicon glyphicon-backward"></span>
+            Back
+        </a>
+        <a href="{% url 'birth_day_certificate_list' %}"
+           type="button" style="float:right;" class="btn btn-primary">
+            <span class="glyphicon glyphicon-list"></span>
+            Birthday Certificate List
+        </a>
+        {% if count == 0 %}
+        <p>
+            <a href="{% url 'birth_day_certificate_create' %}" type="button" style="float:right;" class="btn btn-primary">
+                <span class="glyphicon glyphicon-plus"></span>
+                Birthday Certificate
+            </a>
+        </p>
+        {% endif %}
+    </p>
+    <div class="login_wrapper">
+        <div class="animate form login_form">
+            <section class="login_content">
+                <form action="{% url 'birthday_certificate_search_result' %}" method="POST" enctype="multipart/form-data" autocomplete="off">
+                    {% csrf_token %}
+                    <h1>Birthday Certificate Search</h1>
+                    {% if message %}
+                        <h3 class="red">{{ message }}</h3>
+                    {% endif %}
+
+                    <div class="form-group">
+                        <label for="birth_registration_number" class="col-form-label">Birth Registration Number:</label>
+                        <input type="text" class="form-control" id="birth_registration_number" name="birth_registration_number" required>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </form>
+            </section>
+        </div>
+
+
+    </div>
+{% endblock content %}

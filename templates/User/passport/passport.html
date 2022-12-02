@@ -1,0 +1,115 @@
+{% extends 'include/index.html' %}
+{% block content %}
+    <p class="m-5">
+        <a href="{% url 'user_home' %}" type="button" style="float:left;" class="btn btn-primary">
+            <span class="glyphicon glyphicon-backward"></span>
+            Back
+        </a>
+    </p>
+    {% if count == 0 %}
+        <p>
+            <a href="{% url 'passport_create' %}" type="button" style="float:right;" class="btn btn-primary">
+                <span class="glyphicon glyphicon-plus"></span>
+                Passport
+            </a>
+        </p>
+        <div class="card text-center">
+          <div class="card-header">
+
+          </div>
+          <div class="card-body">
+            <h5 class="card-title"></h5>
+            <p class="card-text"></p>
+            <a href="#" class="btn btn-secondary">No Data Here</a>
+          </div>
+          <div class="card-footer text-muted">
+
+          </div>
+        </div>
+    {% else %}
+        <!-- /.col -->
+        <div class="col-md-12">
+                <p class="lead">PERSONAL DATA AND EMERGENCY CONTACT</p>
+                <div class="row" id="nid_print">
+                    <div class="col-sm-6">
+                        <div class="card">
+{#                            <img class="card-img-top" style="height: 180px; width: 100px" src="{{ request.user.image.url }}" alt="Card image cap">#}
+                            <div class="card-body">
+                                <p class="card-text">Name: {{ passport_info.name }}</p>
+                                <p class="card-text">Father's Name: {{ passport_info.father_name }}<</p>
+                                <p class="card-text">Mother's Name: {{ passport_info.mother_name }}</p>
+                                <p class="card-text">Spouse's Name: {{ passport_info.spouses_name }}</p>
+                                <p class="card-text">Permanent Address: {{ passport_info.permanent_address }}</p>
+                                <p class="card-text">Name:{{ passport_info.e_name }}</p>
+                                <p class="card-text">Relationship:{{ passport_info.e_relationship }}</p>
+                                <p class="card-text">Address:{{ passport_info.e_address }}</p>
+                                <p class="card-text">Telephone No:{{ passport_info.e_phone }}</p>
+                                <p class="card-text">passport type:{{ passport_info.type }}</p>
+                                <p class="card-text">Country Code:{{ passport_info.country_code }}</p>
+                                <p class="card-text">Passport Number:{{ passport_info.passport_number }}</p>
+                                <p class="card-text">Sur Name:{{ passport_info.surname }}</p>
+                                <p class="card-text">Given Name:{{ passport_info.given_name }}</p>
+                                <p class="card-text">Nationality:{{ passport_info.nationality }}</p>
+                                <p class="card-text">Personal_no:{{ passport_info.personal_no }}</p>
+                                <p class="card-text">Date Of Birth:{{ passport_info.dob }}</p>
+                                <p class="card-text">previous_passport_no:{{ passport_info.previous_passport_no }}</p>
+                                <p class="card-text">Sex:{{ passport_info.sex }}</p>
+                                <p class="card-text">place_of_birth:{{ passport_info.place_of_birth }}</p>
+                                <p class="card-text">date_of_issue:{{ passport_info.date_of_issue }}</p>
+                                <p class="card-text">issuing_authority:{{ passport_info.issuing_authority }}</p>
+                                <p class="card-text">date_of_expiry:{{ passport_info.date_of_expiry }}</p>
+                                <p class="card-text">Holder Name:{{ passport_info.holder_name }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table">
+                    <tr>
+                        {% if passport_info.is_verify %}
+                        {% else %}
+                            <th><a class="btn btn-primary" href="{% url 'passport_update' passport_info.id %}">Edit</a>
+                                <a data-toggle="modal" class="btn btn-danger"
+                                   data-target="#delete{{ passport_info.id }}">
+                                    <i class="fa fa-trash">Delete</i>
+                                </a>
+                            </th>
+                        {% endif %}
+                    </tr>
+
+
+                    <!-- Delete Modal -->
+                    <div class="modal fade DeleteModal" id="delete{{ passport_info.id }}"
+                         tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
+                         aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <form method="post"
+                                      action="{% url 'passport_delete' passport_info.id %}"
+                                      enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="modal-body text-center p-3">
+                                        <h5 class="mt-4">Do you want to delete?</h5>
+                                    </div>
+                                    <div class="modal-footer"
+                                         style="border:none !important; border: none !important;">
+                                        <button type="button" class="btn btn-sm btn-primary"
+                                                data-dismiss="modal">No
+                                        </button>
+                                        <button type="submit" class="btn btn-sm btn-danger">Yes
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- /.col -->
+    {% endif %}
+{% endblock %}
+

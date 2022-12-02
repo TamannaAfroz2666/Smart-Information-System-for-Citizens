@@ -1,0 +1,59 @@
+<div class="menu_section">
+    <h3>General</h3>
+    <ul class="nav side-menu">
+        <li>
+            <a href="{% url 'home' %}">
+                <i class="fa fa-home"></i> Home
+                <span class="{% url 'home' %}"></span>
+            </a>
+
+        </li>
+
+        <li>
+            <a href="{% url 'birth_day_certificate_list' %}">
+                <i class="fa fa-certificate"></i>BirthDay Certificate
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'passport_list' %}">
+                <i class="fa fa-certificate"></i>Passport
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'nid_list' %}">
+                <i class="fa fa-certificate"></i> NID
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'skill_list' %}">
+                <i class="fa fa-asterisk"></i> Skills
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'experience_list' %}">
+                <i class="fa fa-asterisk"></i> Experience
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'education_list' %}">
+                <i class="fa fa-bomb"></i> Education
+            </a>
+        </li>
+{#        <li>#}
+{#            <a href="{% url 'dataTableView' %}">#}
+{#                <i class="fa fa-asterisk"></i> Data Table#}
+{#            </a>#}
+{#        </li>#}
+        <li><a><i class="fa fa-desktop"></i> Profile <span class="fa fa-chevron-down"></span></a>
+            <ul class="nav child_menu">
+                <li><a href="{% url 'profile' %}">Profile</a></li>
+                <li><a href="{% url 'change_password' %}">Change Password</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="{% url 'logout' %}">
+                <i class="fa fa-sign-out"></i> Logout
+            </a>
+        </li>
+    </ul>
+</div>

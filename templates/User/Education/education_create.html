@@ -1,0 +1,178 @@
+{% extends 'include/index.html' %} {% block content %}
+<p class="m-5">
+  <a
+    href="{% url 'user_home' %}"
+    type="button"
+    style="float: left"
+    class="btn btn-primary"
+  >
+    <span class="glyphicon glyphicon-backward"></span>
+    Back
+  </a>
+</p>
+<div class="col-md-12 col-sm-12">
+  <div class="x_panel">
+    <div class="x_title">
+      <h2>Education <small>Information</small></h2>
+      <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+      <div class="row">
+        <div class="col-sm-12">
+          <form
+            enctype="multipart/form-data"
+            method="POST"
+            action="{% url 'education_create' %}"
+            autocomplete="off"
+          >
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="institution" class="col-form-label">Board:</label>
+              <select class="form-control" id="board" name="board" required>
+                <option value="">Select Board</option>
+                <option value="Dhaka">Dhaka</option>
+                <option value="Rajshahi">Rajshahi</option>
+                <option value="Comilla">Comilla</option>
+                <option value="Jessore">Jessore</option>
+                <option value="Chittagong">Chittagong</option>
+                <option value="Barisal">Barisal</option>
+                <option value="Sylhet">Sylhet</option>
+                <option value="Dinajpur">Dinajpur</option>
+                <option value="Madrasah">Madrasah</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="institution" class="col-form-label"
+                >Examination:</label
+              >
+              <select
+                class="form-control"
+                id="examination"
+                name="examination"
+                required
+              >
+                <option value="">Select Examination</option>
+                <option value="SSC">SSC</option>
+                <option value="HSC">HSC</option>
+                <option value="BSC">BSC</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="roll_no" class="col-form-label">Roll No:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="roll_no"
+                name="roll_no"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="registration_no" class="col-form-label"
+                >Registration No:</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="registration_no"
+                name="registration_no"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="institution" class="col-form-label"
+                >Institution Name:</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="institution"
+                name="institution"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="major" class="col-form-label">Major:</label>
+              <input type="text" class="form-control" id="major" name="major" />
+            </div>
+            <div class="form-group">
+              <label for="degree" class="col-form-label">Degree:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="degree"
+                name="degree"
+              />
+            </div>
+            <div class="form-group">
+              <label for="location" class="col-form-label">Location:</label>
+              <input
+                type="text"
+                id="location"
+                class="form-control"
+                name="location"
+              />
+            </div>
+            <div class="form-group">
+              <label for="description" class="col-form-label"
+                >Description:</label
+              >
+              <textarea
+                id="description"
+                class="form-control"
+                name="description"
+              ></textarea>
+            </div>
+            <div class="form-group">
+              <label for="fromDate" class="col-form-label">From:</label>
+              <input
+                type="date"
+                class="form-control"
+                id="fromDate"
+                name="fromDate"
+                placeholder="Pick a date"
+              />
+            </div>
+            <div class="form-group">
+              <label for="toDate" class="col-form-label">To:</label>
+              <input
+                type="date"
+                class="form-control"
+                id="toDate"
+                name="toDate"
+                placeholder="Pick a date"
+              />
+            </div>
+            <div class="form-group form-check">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="i_currently_attend"
+                name="i_currently_attend"
+              />
+              <label class="form-check-label" for="i_currently_attend"
+                >I Currently Attend</label
+              >
+            </div>
+            <div class="form-group">
+              <label class="col-form-label" for="image"
+                >Certificate Image</label
+              >
+              <input
+                type="file"
+                class="form-control-file"
+                id="image"
+                name="image"
+              />
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

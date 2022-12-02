@@ -1,0 +1,69 @@
+{% extends 'include/index.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="col-md-12 col-sm-12 ">
+        <p class="m-5">
+            {% if request.user.is_superuser %}
+                <a href="{% url 'admin_home' %}" type="button" style="float:left;" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-backward"></span>
+                    Back
+                </a>
+            {% else %}
+                <a href="{% url 'user_home' %}" type="button" style="float:left;" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-backward"></span>
+                    Back
+                </a>
+            {% endif %}
+        </p>
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Profile <small>Information</small></h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <form action="{% url 'update_profile' %}" enctype="multipart/form-data" method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="email" class="col-form-label">Username:</label>
+                                <input type="text" class="form-control" placeholder="Username" required=""
+                                       name="username"
+                                       value="{{ request.user.username }}" disabled
+                                       id="username"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="col-form-label">Email:</label>
+                                <input type="email" class="form-control" placeholder="Email" required="" name="email"
+                                       value="{{ request.user.email }}"
+                                       id="email"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone_number" class="col-form-label">Phone Number:</label>
+                                <input type="text" class="form-control" placeholder="Phone Number" required=""
+                                       name="phone_number"
+                                       value="{{ request.user.phone_number }}"
+                                       id="phone_number"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="address" class="col-form-label">Address:</label>
+                                <input type="text" class="form-control" placeholder="Address" required="" name="address"
+                                       value="{{ request.user.address }}"
+                                       id="address"/>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <img src="{{ request.user.image.url }}" class="img-thumbnail">
+                                <input type="file" class="form-control-file" id="image" name="image">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends 'include/index.html' %}
+{% block content %}
+       <p class="m-5">
+        <a href="{% url 'user_home' %}" type="button" style="float:left;" class="btn btn-primary">
+            <span class="glyphicon glyphicon-backward"></span>
+            Back
+        </a>
+    </p>
+    {% if count == 0 %}
+        <p>
+            <h1
+               class="btn btn-danger">
+                No Data Show
+            </h1>
+        </p>
+    {% else %}
+    <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Your Education <small>Information</small></h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card-box table-responsive">
+                            <table class="table">
+                                <tbody>
+                                <tr>
+                                    <th>board</th>
+                                    <td>{{ education.board }}</td>
+                                </tr>
+                                <tr>
+                                    <th>examination</th>
+                                    <td>{{ education.examination }}</td>
+                                </tr>
+                                <tr>
+                                    <th>roll_no</th>
+                                    <td>{{ education.roll_no }}</td>
+                                </tr>
+                                <tr>
+                                    <th>registration_no</th>
+                                    <td> {{ education.registration_no }}</td>
+                                </tr>
+                                <tr>
+                                    <th>institution</th>
+                                    <td>{{ education.institution }}</td>
+                                </tr>
+                                <tr>
+                                    <th>major</th>
+                                    <td>{{ education.major }}</td>
+                                </tr>
+                                <tr>
+                                    <th>degree</th>
+                                    <td>{{ education.degree }}</td>
+                                </tr>
+                                <tr>
+                                    <th>location</th>
+                                    <td>{{ education.location }}</td>
+                                </tr>
+                                <tr>
+                                    <th>description</th>
+                                    <td>{{ education.description }}</td>
+                                </tr>
+                                <tr>
+                                    <th>fromDate</th>
+                                    <td>{{ education.fromDate }}</td>
+                                </tr>
+                                <tr>
+                                    <th>toDate</th>
+                                    <td>{{ education.toDate }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

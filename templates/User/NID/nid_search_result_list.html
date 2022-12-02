@@ -1,0 +1,54 @@
+{% extends 'include/index.html' %}
+{% block content %}
+    <p class="m-5">
+    <a href="{% url 'user_home' %}" type="button" style="float:left;" class="btn btn-primary">
+            <span class="glyphicon glyphicon-backward"></span>
+              Back
+        </a>
+    </p>
+
+    <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>All NID Information</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card-box table-responsive">
+                            <table id="datatable-buttons" class="table table-striped table-bordered"
+                                   style="width:100%">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Father Name</th>
+                                    <th>Mother Name</th>
+                                    <th>NID NO</th>
+                                    <th>Birth Date</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for nid in all_nid_information %}
+                                    <tr>
+                                        <td>{{ nid.name_english }}</td>
+                                        <td>{{ nid.father_name }}</td>
+                                        <td>{{ nid.mother_name }}</td>
+                                        <td>{{ nid.nid_no }}</td>
+                                        <td>{{ nid.date_of_birth }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascript %}
+
+{% endblock %}

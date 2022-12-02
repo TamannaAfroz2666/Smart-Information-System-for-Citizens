@@ -1,0 +1,127 @@
+{% extends 'include/index.html' %}
+{% block content %}
+    <p class="m-5">
+        <a href="{% url 'user_home' %}" type="button" style="float:left;" class="btn btn-primary">
+            <span class="glyphicon glyphicon-backward"></span>
+            Back
+        </a>
+    </p>
+    <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Education Update<small>Information</small></h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <form enctype="multipart/form-data" method="POST" autocomplete="off"
+                              action="{% url 'education_update' education.id %}">
+                            {% csrf_token %}
+                        <div class="form-group">
+                                <label for="institution" class="col-form-label">Board:</label>
+                                <select class="form-control" id="board" name="board" required>
+                                  <option value="">Select Board</option>
+                                  <option {% if education.board == "Dhaka" %} selected {% endif %} value="Dhaka">Dhaka</option>
+                                  <option {% if education.board == "Rajshahi" %} selected {% endif %} value="Rajshahi">Rajshahi</option>
+                                  <option {% if education.board == "Comilla" %} selected {% endif %} value="Comilla">Comilla</option>
+                                  <option {% if education.board == "Jessore" %} selected {% endif %} value="Jessore">Jessore</option>
+                                  <option {% if education.board == "Chittagong" %} selected {% endif %} value="Chittagong">Chittagong</option>
+                                  <option {% if education.board == "Barisal" %} selected {% endif %} value="Barisal">Barisal</option>
+                                  <option {% if education.board == "Sylhet" %} selected {% endif %} value="Sylhet">Sylhet</option>
+                                  <option {% if education.board == "Dinajpur" %} selected {% endif %} value="Dinajpur">Dinajpur</option>
+                                  <option {% if education.board == "Madrasah" %} selected {% endif %} value="Madrasah">Madrasah</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="institution" class="col-form-label">Examination:</label>
+                                <select class="form-control" id="examination" name="examination" required>
+                                  <option value="">Select Examination</option>
+                                  <option {% if education.examination == "SSC" %} selected {% endif %} value="SSC">SSC</option>
+                                  <option {% if education.examination == "HSC" %} selected {% endif %} value="HSC">HSC</option>
+                                  <option {% if education.examination == "BSC" %} selected {% endif %} value="BSC">BSC</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="roll_no" class="col-form-label">Roll No:</label>
+                                <input type="text" class="form-control" id="roll_no" name="roll_no" value="{{ education.roll_no }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="registration_no" class="col-form-label">Registration No:</label>
+                                <input type="text" class="form-control" value="{{ education.registration_no }}"
+                                       id="registration_no" name="registration_no" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="institution" class="col-form-label">Institution
+                                    Name:</label>
+                                <input type="text" class="form-control" id="institution"
+                                       name="institution" value="{{ education.institution }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="major" class="col-form-label">Major:</label>
+                                <input type="text" class="form-control" id="major"
+                                       name="major" value="{{ education.major }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="degree"
+                                       class="col-form-label">Degree:</label>
+                                <input type="text" class="form-control" id="degree"
+                                       name="degree" value="{{ education.degree }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="location"
+                                       class="col-form-label">Location:</label>
+                                <input type="text" id="location" class="form-control"
+                                       name="location" value="{{ education.location }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="description" class="col-form-label">Description:</label>
+                                <textarea id="description" class="form-control"
+                                          name="description">{{ education.description }}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="fromDate"
+                                       class="col-form-label">From:</label>
+                                <input type="date" class="form-control" id="fromDate"
+                                       name="fromDate"
+                                       value="{{ education.fromDate|date:"Y-m-d" }}"
+                                       placeholder="Pick a date">
+                            </div>
+                            <div class="form-group">
+                                <label for="toDate" class="col-form-label">To:</label>
+                                <input type="date" class="form-control" id="toDate"
+                                       value="{{ education.toDate|date:"Y-m-d" }}"
+                                       name="toDate" placeholder="Pick a date">
+                            </div>
+                            <div class="form-group form-check">
+
+                                <input type="checkbox" class="form-check-input"
+                                       id="i_currently_attend"
+                                        {% if education.i_currently_attend %}
+                                       checked
+                                        {% endif %}
+                                       name="i_currently_attend">
+                                <label class="form-check-label"
+                                       for="i_currently_attend">I Currently
+                                    Attend</label>
+                            </div>
+                        <div class="form-group">
+                                <label class="col-form-label" for="image">Certificate Image</label><br>
+                               {% if education.image %}
+                                   <a href="{{ education.image.url }}">{{ education.image }}</a>
+                               {% endif %}
+                                <input type="file" class="form-control-file" id="image" name="image">
+                            </div>
+                            <div class="modal-footer">
+
+                                <button type="submit" class="btn btn-primary">Save
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

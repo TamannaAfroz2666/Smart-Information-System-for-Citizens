@@ -1,0 +1,11 @@
+
+    {% for message in messages %}
+        <div class="alert {{ message.tags }} alert-success alert-dismissible fade show p-0" role="alert">
+            <span class="pl-4 mt-3">{{ message }}</span>
+            <button type="button" class="close mt-3" data-dismiss="alert" aria-label="Close">
+                <span class="float-right" aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
+
+
